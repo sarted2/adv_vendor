@@ -17,7 +17,7 @@
 #include "HAL.h"
 #include "app_mesh_config.h"
 #include "app.h"
-
+#include "ws2812.h"
 /*********************************************************************
  * GLOBAL TYPEDEFS
  */
@@ -104,6 +104,7 @@ int main(void)
 #endif
     PRINT("%s\n", VER_LIB);
     PRINT("%s\n", VER_MESH_LIB);
+    paoma_proc();
     CH59x_BLEInit();
     HAL_Init();
     bt_mesh_lib_init();

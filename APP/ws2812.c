@@ -27,14 +27,12 @@ unsigned char buf[SNUM][3]={
 };
 
 
- int numberone= 0;
- int numbertwo= 0;
- int numberthree= 0;
- int ione = 0;
- int itwo =0;
- int ithree =0;
 
- char segments[2][4][5];
+
+       char part1[5];
+       char part2[4];
+       char part3[4];
+       char part4[4];
 
 
 //发0码
@@ -220,135 +218,256 @@ void SendOneFrame2(unsigned char *ptr2) {
 
 void chuli_proc(char message[])
 {
-    int length = strlen(message);  // 计算字符串长度
-    int result = length / 13;   // 计算长度除以13的商
-    int b=result+1;
 
-    for(int a=1;a<b;a=a+1)
-    {
-
-    strncpy(segments[a-1][0], message+13*(a-1), 4);
-    segments[a-1][0][5] = '\0'; // Null-terminate the string
-
-        strncpy( segments[a-1][1], message + 4+13*(a-1), 3);
-        segments[a-1][1][4]= '\0';
-
-        strncpy(segments[a-1][2], message + 7+13*(a-1), 3);
-        segments[a-1][2][4] = '\0';
-
-        strncpy( segments[a-1][3], message + 10+13*(a-1), 3);
-        segments[a-1][3][4] = '\0';
-
-        while (segments[a-1][1][ione] != '\0') {
-            // 将字符转换为对应的数字并累加到结果中
-            numberone = numberone * 10 + (segments[a-1][1][ione] - '0');
-            ione++;
-        }
-
-        while (segments[a-1][2][itwo] != '\0') {
-            // 将字符转换为对应的数字并累加到结果中
-            numbertwo = numbertwo * 10 + (segments[a-1][2][itwo] - '0');
-            itwo++;
-        }
-
-        while (segments[a-1][3][ithree] != '\0') {
-            // 将字符转换为对应的数字并累加到结果中
-            numberthree = numberthree * 10 + (segments[a-1][3][ithree] - '0');
-            ithree++;
-        }
+    int numberone= 0;
+    int numbertwo= 0;
+    int numberthree= 0;
+    int ione = 0;
+    int itwo =0;
+    int ithree =0;
 
 
-        if(strcmp(segments[a-1][0], "0101") == 0)
+
+
+        strncpy(part1, message, 4);
+        part1[4] = '\0';
+
+        strncpy( part2, message + 4, 3);
+        part2[3]= '\0';
+
+        strncpy(part3, message + 7, 3);
+        part3[3] = '\0';
+
+        strncpy( part4, message + 10, 3);
+        part4[3] = '\0';
+
+        while (part2[ione] != '\0') {
+                                // 将字符转换为对应的数字并累加到结果中
+                                numberone = numberone * 10 + (part2[ione] - '0');
+                                ione++;
+                            }
+
+                            while (part3[itwo] != '\0') {
+                                // 将字符转换为对应的数字并累加到结果中
+                                numbertwo = numbertwo * 10 + (part3[itwo] - '0');
+                                itwo++;
+                            }
+
+                            while (part4[ithree] != '\0') {
+                                // 将字符转换为对应的数字并累加到结果中
+                                numberthree = numberthree * 10 + (part4[ithree] - '0');
+                                ithree++;
+                            }
+
+        if(strcmp(part1, "0101") == 0)
                {
+
+
                                    buf[0][0]=numberone;
                                    buf[0][1]=numbertwo;
                                    buf[0][2]=numberthree;
 
-                                   SendOneFrame(buf);
+                                   SendOneFrame((unsigned char *)buf);
+
 
                }
-
-        if(strcmp(segments[a-1][0], "0102") == 0)
+        else if(strcmp(part1, "0102") == 0)
                        {
+
+
+
                                            buf[1][0]=numberone;
                                            buf[1][1]=numbertwo;
                                            buf[1][2]=numberthree;
 
-                                           SendOneFrame(buf);
+                                           SendOneFrame((unsigned char *)buf);
 
                        }
-
-        if(strcmp(segments[a-1][0], "0103") == 0)
+        else if(strcmp(part1, "0103") == 0)
                                {
+
+
+
                                                    buf[2][0]=numberone;
                                                    buf[2][1]=numbertwo;
                                                    buf[2][2]=numberthree;
 
-                                                   SendOneFrame(buf);
+                                                   SendOneFrame((unsigned char *)buf);
 
                                }
-
-        if(strcmp(segments[a-1][0], "0201") == 0)
-                       {
-                                           buf1[0][0]=numberone;
-                                           buf1[0][1]=numbertwo;
-                                           buf1[0][2]=numberthree;
-
-                                           SendOneFrame1(buf1);
-
-                       }
-        if(strcmp(segments[a-1][0], "0202") == 0)
-                              {
-                                                  buf1[1][0]=numberone;
-                                                  buf1[1][1]=numbertwo;
-                                                  buf1[1][2]=numberthree;
-
-                                                  SendOneFrame1(buf1);
-
-                              }
-        if(strcmp(segments[a-1][0], "0203") == 0)
-                              {
-                                                  buf1[2][0]=numberone;
-                                                  buf1[2][1]=numbertwo;
-                                                  buf1[2][2]=numberthree;
-
-                                                  SendOneFrame1(buf1);
-
-                              }
-
-        if(strcmp(segments[a-1][0], "0301") == 0)
-                               {
-                                                   buf2[0][0]=numberone;
-                                                   buf2[0][1]=numbertwo;
-                                                   buf2[0][2]=numberthree;
-
-                                                   SendOneFrame2(buf2);
-
-                               }
-        if(strcmp(segments[a-1][0], "0302") == 0)
+        else if(strcmp(part1, "0201") == 0)
                                        {
-                                                           buf2[1][0]=numberone;
-                                                           buf2[1][1]=numbertwo;
-                                                           buf2[1][2]=numberthree;
 
-                                                           SendOneFrame2(buf2);
+
+
+                                                           buf1[0][0]=numberone;
+                                                           buf1[0][1]=numbertwo;
+                                                           buf1[0][2]=numberthree;
+
+                                                           SendOneFrame1((unsigned char *)buf1);
 
                                        }
+        else if(strcmp(part1, "0202") == 0)
+                                              {
 
-        if(strcmp(segments[a-1][0], "0303") == 0)
-                                       {
-                                                           buf2[2][0]=numberone;
-                                                           buf2[2][1]=numbertwo;
-                                                           buf2[2][2]=numberthree;
 
-                                                           SendOneFrame2(buf2);
 
-                                       }
+                                                                  buf1[1][0]=numberone;
+                                                                  buf1[1][1]=numbertwo;
+                                                                  buf1[1][2]=numberthree;
+
+                                                                  SendOneFrame1((unsigned char *)buf1);
+
+                                              }
+        else if(strcmp(part1, "0203") == 0)
+                                              {
+
+
+
+                                                                  buf1[2][0]=numberone;
+                                                                  buf1[2][1]=numbertwo;
+                                                                  buf1[2][2]=numberthree;
+
+                                                                  SendOneFrame1((unsigned char *)buf1);
+
+                                              }
+        else if(strcmp(part1, "0301") == 0)
+                                              {
+
+
+
+                                                                  buf2[0][0]=numberone;
+                                                                  buf2[0][1]=numbertwo;
+                                                                  buf2[0][2]=numberthree;
+
+                                                                  SendOneFrame2((unsigned char *)buf2);
+
+                                              }
+        else if(strcmp(part1, "0302") == 0)
+                                                      {
+
+
+
+                                                                          buf2[1][0]=numberone;
+                                                                          buf2[1][1]=numbertwo;
+                                                                          buf2[1][2]=numberthree;
+
+                                                                          SendOneFrame2((unsigned char *)buf2);
+
+                                                      }
+        else if(strcmp(part1, "0303") == 0)
+                                                      {
+
+
+
+                                                                          buf2[2][0]=numberone;
+                                                                          buf2[2][1]=numbertwo;
+                                                                          buf2[2][2]=numberthree;
+
+                                                                          SendOneFrame2((unsigned char *)buf2);
+
+                                                      }
+        else if(strcmp(part1, "0000") == 0)
+                                                              {
+
+
+
+                                                                                buf[0][0]=000;
+                                                                                buf[0][1]=000;
+                                                                                buf[0][2]=000;
+                                                                                buf[1][0]=000;
+                                                                                buf[1][1]=000;
+                                                                                buf[1][2]=000;
+                                                                                buf[2][0]=000;
+                                                                                buf[2][1]=000;
+                                                                                buf[2][2]=000;
+                                                                                buf1[0][0]=000;
+                                                                                buf1[0][1]=000;
+                                                                                buf1[0][2]=000;
+                                                                                buf1[1][0]=000;
+                                                                                buf1[1][1]=000;
+                                                                                buf1[1][2]=000;
+                                                                                buf1[2][0]=000;
+                                                                                buf1[2][1]=000;
+                                                                                buf1[2][2]=000;
+                                                                                buf2[0][0]=000;
+                                                                                buf2[0][1]=000;
+                                                                                buf2[0][2]=000;
+                                                                                buf2[1][0]=000;
+                                                                                buf2[1][1]=000;
+                                                                                buf2[1][2]=000;
+                                                                                buf2[2][0]=000;
+                                                                                buf2[2][1]=000;
+                                                                                buf2[2][2]=000;
+                                                                                SendOneFrame((unsigned char *)buf);
+                                                                                SendOneFrame1((unsigned char *)buf1);
+                                                                                SendOneFrame2((unsigned char *)buf2);
+
+                                                              }
+
+}
+
+void paoma_proc()
+{
+    for(int count=0;count<3;count++)
+    {
+        for(int i = 0; i < 3; i++)
+                {
+                    buf[i][0] = 150-50*i;
+                    buf[i][1] = 60*i;
+                    buf[i][2] = 100+50*i;
+                    buf1[i][0] = 150-50*i;
+                    buf1[i][1] = 60*i;
+                    buf1[i][2] = 100+50*i;
+                    buf2[i][0] = 150-50*i;
+                    buf2[i][1] = 60*i;
+                    buf2[i][2] = 100+50*i;
+                    SendOneFrame((unsigned char *)buf);
+                    SendOneFrame1((unsigned char *)buf1);
+                    SendOneFrame2((unsigned char *)buf2);
+                    DelayMs(125);
+                    buf[i][0] = 0;
+                    buf[i][1] = 0;
+                    buf[i][2] = 0;
+                    buf1[i][0] = 0;
+                    buf1[i][1] = 0;
+                    buf1[i][2] = 0;
+                    buf2[i][0] = 0;
+                    buf2[i][1] = 0;
+                    buf2[i][2] = 0;
+                }
+
+                // 从第三个灯珠到第一个灯珠
+                for(int i = 2; i >= 0; i--)
+                {
+                    buf[i][0] = 100+50*i;
+                    buf[i][1] = 60*i;
+                    buf[i][2] = 150-50*i;
+                    buf1[i][0] = 100+50*i;
+                    buf1[i][1] = 60*i;
+                    buf1[i][2] = 150-50*i;
+                    buf2[i][0] = 100+50*i;
+                    buf2[i][1] = 60*i;
+                    buf2[i][2] = 150-50*i;
+                    SendOneFrame((unsigned char *)buf);
+                    SendOneFrame1((unsigned char *)buf1);
+                    SendOneFrame2((unsigned char *)buf2);
+                    DelayMs(125);
+                    buf[i][0] = 0;
+                    buf[i][1] = 0;
+                    buf[i][2] = 0;
+                    buf1[i][0] = 0;
+                    buf1[i][1] = 0;
+                    buf1[i][2] = 0;
+                    buf2[i][0] = 0;
+                    buf2[i][1] = 0;
+                    buf2[i][2] = 0;
+                }
+
     }
-
-                                       numberone=0;
-                                       numbertwo=0;
-                                       numberthree=0;
+    SendOneFrame((unsigned char *)buf);
+    SendOneFrame1((unsigned char *)buf1);
+    SendOneFrame2((unsigned char *)buf2);
 
 }
 

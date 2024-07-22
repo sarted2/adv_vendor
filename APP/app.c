@@ -369,9 +369,9 @@ static void vendor_model_srv_rsp_handler(const vendor_model_srv_status_t *val)
             }
             case CMD_SENDDATA:
             {
-                memset(temp_data,0,strlen(temp_data));
                 uint8ArrayToCharArray(app_mesh_manage.data.buf,sizeof(app_mesh_manage.data.buf),temp_data);
                 chuli_proc(temp_data);
+                memset(temp_data,0,strlen(temp_data));
                 break;
             }
         }
@@ -585,7 +585,6 @@ void blemesh_on_sync(void)
 void App_Init()
 {
     App_TaskID = TMOS_ProcessEventRegister(App_ProcessEvent);
-
     vendor_model_srv_init(vnd_models);
     blemesh_on_sync();
     HAL_KeyInit();

@@ -28,5 +28,6 @@ void SendOneFrame(unsigned char *ptr);
 void SendOneFrame1(unsigned char *ptr1);
 void SendOneFrame2(unsigned char *ptr2);
 void chuli_proc(char message[]);
+void paoma_proc();
 
 #endif /* SRC_WS2812_H_ */

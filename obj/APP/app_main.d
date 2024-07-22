@@ -26,7 +26,8 @@ APP/app_main.o: ../APP/app_main.c \
  D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/SLEEP.h \
  D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/LED.h \
  D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/KEY.h \
- D:\MESH\CH592EVT\EVT\EXAM\BLE\MESH\adv_vendor\APP\include/app.h
+ D:\MESH\CH592EVT\EVT\EXAM\BLE\MESH\adv_vendor\APP\include/app.h \
+ D:\MESH\CH592EVT\EVT\EXAM\BLE\MESH\adv_vendor\APP\include/ws2812.h
 
 D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/CONFIG.h:
 
@@ -83,3 +84,5 @@ D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/LED.h:
 D:\MESH\CH592EVT\EVT\EXAM\BLE\HAL\include/KEY.h:
 
 D:\MESH\CH592EVT\EVT\EXAM\BLE\MESH\adv_vendor\APP\include/app.h:
+
+D:\MESH\CH592EVT\EVT\EXAM\BLE\MESH\adv_vendor\APP\include/ws2812.h:
